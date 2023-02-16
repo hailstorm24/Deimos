@@ -5,6 +5,14 @@
 #include <string>
 #include "display/lv_objx/lv_btnm.h"
 #include "pros/misc.h"
+#define DIGITAL_SENSOR_PORT_A 4
+#define DIGITAL_SENSOR_PORT_B 3
+#define DIGITAL_SENSOR_PORT_C 2
+pros::ADIDigitalOut expansionA (DIGITAL_SENSOR_PORT_A);
+pros::ADIDigitalOut expansionB (DIGITAL_SENSOR_PORT_B);
+pros::ADIDigitalOut expansionC (DIGITAL_SENSOR_PORT_C);
+
+
 
 // drive code -- powers the drivetrain based on the x-axis of the right joystick and y-axis of the left joystick
 void setDriveMotors(){
@@ -27,6 +35,14 @@ void setDrive(int leftPower,int rightPower){
   driveRightBack = rightPower;
 }
 
+// triggers expansion pneumatics if the X button is pressed
+void expansionOn(){
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)){
+        expansionA.set_value(true);
+        expansionB.set_value(true);
+        expansionC.set_value(true);
+    }
+}
 // powers the intake/roller based on the states of buttons R1 and R2
 void setIntakeRollerMotors(){
     int intakeOn = 200 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2));

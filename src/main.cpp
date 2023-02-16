@@ -24,7 +24,7 @@ void autonomous() {
 	pidTurn(90, 1, -1);
 }
 
-// drive controls -- controls drivetrain/intake-roller mechanism and holds catapult until button A triggers the catapult to cycle
+// drive controls -- controls drivetrain/intake-roller mechanism/expansion and holds catapult until button A triggers the catapult to cycle
 void opcontrol() {
 	bool released = true; 
 	while (true) {
@@ -38,6 +38,7 @@ void opcontrol() {
 		if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)==0 && !released){
 			released = !released;
 		}
+		expansionOn();
 		pros::delay(20);
 	}
 }

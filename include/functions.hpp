@@ -11,6 +11,7 @@ void setIntakeRollerMotors();
 void setDrive(int leftPower,int rightPower);
 void setIntakeRoller(int power);
 void cycleCata(int distance);
+void expansionOn();
 
 // pid, inertial-sensor, and other functions
 void pidDriveStraight(int distance, int distanceTolerance, int direction, int angle, int angleTolerance);

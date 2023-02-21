@@ -1,14 +1,18 @@
 #include "functions.hpp"
 #include "globals.hpp"
 #include "main.h"
-
-// sets the weights for the proportional, integral, and derivative PID actions
-const double kP = 1.0;
-const double kI = 0.1;
-const double kD = 0.1;
+#include <string>
 
 // this function uses a PID and inertial-sensor to travel a given distance with a set tolerance, direction, and target angle / angle tolerance.
-void pidDriveStraight(int distance, int distanceTolerance, int direction, int angle, int angleTolerance) {
+void pidDriveStraight(int distance, double distanceTolerance, int direction, int angle, double angleTolerance) {
+
+// sets the weights for the proportional, integral, and derivative PID actions based on the ultimate gain and period
+  const double kU = 15;
+  const double tU = 300;
+
+  const double kP = 0.6*kU;
+  const double kI = 1.2*kU/tU;
+  const double kD = 0.075*kU*tU;
 
   // resets drive encoders, sets all variables to zero
   resetDriveEncoders();
@@ -61,7 +65,17 @@ void pidDriveStraight(int distance, int distanceTolerance, int direction, int an
 }
 
 // this function uses a PID to turn in a direction to a target angle with a given angle tolerance.
-void pidTurn(int angle, int angleTolerance, int direction) {
+void pidTurn(int angle, double angleTolerance) {
+
+  // sets the weights for the proportional, integral, and derivative PID actions
+
+  const double kP = 5;
+  const double kI = 0;
+  const double kD = 0;
+
+  //   const double kP = 0.6*kU;
+  // const double kI = 1.2*kU/tU;
+  // const double kD = 0.075*kU*tU;
 
   // sets all variables to zero
   double angleIntegral = 0.0;
@@ -86,11 +100,11 @@ void pidTurn(int angle, int angleTolerance, int direction) {
     int angleAdjustment = kP * angleError + kI * angleIntegral + kD * angleDerivative;
     
     // power the drivetrain accordingly
-    setDrive((-direction)*angleAdjustment,(direction)*angleAdjustment);
+    setDrive(-angleAdjustment, angleAdjustment);
     pros::delay(10);
 
     // check to see if the target has been reached and break if this is the case
-    if (angleError < angleTolerance) {
+    if (fabs(angleError) < angleTolerance) {
         targetReached = true;
         setDrive(0,0);
     }
@@ -100,6 +114,7 @@ void pidTurn(int angle, int angleTolerance, int direction) {
 
 // this function returns the angle measured by the inertial sensor
 int getCurrentAngle(){
+    controller.set_text(0, 0, std::to_string((int)inertialSensor.get_rotation()%360));
     return((int)inertialSensor.get_rotation()%360);
 }
 

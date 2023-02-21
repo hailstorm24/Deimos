@@ -1,5 +1,6 @@
 #pragma once
 #include "main.h"
+#include "pros/optical.hpp"
 // This file is where I declare all of the variables I define in globals.
 
 //CONTROLLER
@@ -22,3 +23,4 @@ extern pros::Motor intake;
 
 //SENSORS
 extern pros::Imu inertialSensor;
+extern pros::Optical opticalSensor;

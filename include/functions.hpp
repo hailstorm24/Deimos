@@ -13,9 +13,18 @@ void setIntakeRoller(int power);
 void cycleCata(int distance);
 void expansionOn();
 
+// autons
+
+void skillsAuton();
+
+// auton functions
+void straight(double tiles);
+void turn(int degrees);
+void spinRoller(bool blue, int bailTime);
+
 // pid, inertial-sensor, and other functions
-void pidDriveStraight(int distance, int distanceTolerance, int direction, int angle, int angleTolerance);
-void pidTurn(int angle, int angleTolerance, int direction);
+void pidDriveStraight(int distance, double distanceTolerance, int direction, int angle, double angleTolerance);
+void pidTurn(int angle, double angleTolerance);
 
 // pid/inertial-sensor helper functions
 int getCurrentAngle();

@@ -20,8 +20,7 @@ void competition_initialize() {
 
 // autonomous code -- this is where we will run/call our different autonomous programs
 void autonomous() {
-	pidDriveStraight(1000, 1, 1, 0, 1);
-	pidTurn(90, 1, -1);
+	skillsAuton();
 }
 
 // drive controls -- controls drivetrain/intake-roller mechanism/expansion and holds catapult until button A triggers the catapult to cycle

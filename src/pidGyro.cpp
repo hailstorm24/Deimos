@@ -7,8 +7,8 @@
 void pidDriveStraight(int distance, double distanceTolerance, int direction, int angle, double angleTolerance) {
 
 // sets the weights for the proportional, integral, and derivative PID actions based on the ultimate gain and period
-  const double kU = 15;
-  const double tU = 300;
+  const double kU = 775000;
+  const double tU = 250;
 
   const double kP = 0.6*kU;
   const double kI = 1.2*kU/tU;

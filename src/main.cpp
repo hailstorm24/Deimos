@@ -20,6 +20,7 @@ void competition_initialize() {
 
 // autonomous code -- this is where we will run/call our different autonomous programs
 void autonomous() {
+	// straight(1);
 	skillsAuton();
 }
 

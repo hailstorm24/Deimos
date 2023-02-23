@@ -10,9 +10,13 @@ void pidDriveStraight(int distance, double distanceTolerance, int direction, int
   const double kU = 775000;
   const double tU = 250;
 
-  const double kP = 0.6*kU;
-  const double kI = 1.2*kU/tU;
-  const double kD = 0.075*kU*tU;
+  // const double kP = 0.6*kU;
+  // const double kI = 1.2*kU/tU;
+  // const double kD = 0.075*kU*tU;
+
+  const double kP = 0.325;
+  const double kI = 0.00020;
+  const double kD = 0.3; // 0.15;
 
   // resets drive encoders, sets all variables to zero
   resetDriveEncoders();
@@ -33,12 +37,17 @@ void pidDriveStraight(int distance, double distanceTolerance, int direction, int
     // compare the distance measured through motor encoder units to the target distance. 
     int currentDistance = getCurrentDistance();
     distanceError = distance - currentDistance;
+
+    controller.set_text(0, 0, std::to_string(distanceError));
     // compare the angle measured through the inertial sensor to the target angle
     int currentAngle = getCurrentAngle();
     angleError = angle - currentAngle;
 
     // compute the integrals and derivatives for the distances and angle
     distanceIntegral += distanceError;
+    if(distanceError > 1000.0){
+      distanceIntegral = 0;
+    }
     distanceDerivative = distanceError - distancePrevError;
     distancePrevError = distanceError;
 
@@ -48,7 +57,8 @@ void pidDriveStraight(int distance, double distanceTolerance, int direction, int
 
     // using the predefined weights and established values for the three PID actions, calculate the necessary speed and angle adjustment
     int motorSpeed = kP * distanceError + kI * distanceIntegral + kD * distanceDerivative;
-    int angleAdjustment = kP * angleError + kI * angleIntegral + kD * angleDerivative;
+    int angleAdjustment = 0;
+    // int angleAdjustment = kP * angleError + kI * angleIntegral + kD * angleDerivative;
 
     // power the drivetrain accordingly
     setDrive((direction*motorSpeed)+angleAdjustment,(direction*motorSpeed)-angleAdjustment);
@@ -114,7 +124,7 @@ void pidTurn(int angle, double angleTolerance) {
 
 // this function returns the angle measured by the inertial sensor
 int getCurrentAngle(){
-    controller.set_text(0, 0, std::to_string((int)inertialSensor.get_rotation()%360));
+    // controller.set_text(0, 0, std::to_string((int)inertialSensor.get_rotation()%360));
     return((int)inertialSensor.get_rotation()%360);
 }
 

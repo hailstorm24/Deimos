@@ -3,7 +3,7 @@
 #include "main.h"
 
 void straight(double tiles){
-    pidDriveStraight(fabs(tiles)*3500, 1, tiles/fabs(tiles), 0, 1);
+    pidDriveStraight(fabs(tiles)*3800, 1, tiles/fabs(tiles), 0, 1);
 }
 
 void turn(int degrees){
@@ -31,7 +31,7 @@ void spinRoller(bool blue, int bailTime){
 void skillsAuton(){
     // straight(-0.1);
 	// spinRoller(true,1000);
-	straight(2);
-	// turn(-90);
+	// straight(4);
+	turn(-90);
 	// straight(1);
 }

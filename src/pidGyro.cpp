@@ -6,6 +6,11 @@
 // this function uses a PID and inertial-sensor to travel a given distance with a set tolerance, direction, and target angle / angle tolerance.
 void pidDriveStraight(int distance, double distanceTolerance, int direction, int angle, double angleTolerance) {
 
+  // start timer
+
+
+  int timeOut = pros::millis() + 1000 + 1200*(distance/3800);
+
 // sets the weights for the proportional, integral, and derivative PID actions based on the ultimate gain and period
   const double kU = 775000;
   const double tU = 250;
@@ -19,7 +24,7 @@ void pidDriveStraight(int distance, double distanceTolerance, int direction, int
   const double kD = 0.3;
 
   const double akP = 10;
-  const double akI = 0;
+  const double akI = 0.0025;
   const double akD = 0.7;
 
 
@@ -37,7 +42,7 @@ void pidDriveStraight(int distance, double distanceTolerance, int direction, int
 
   bool targetReached = false;
 
-  while (!targetReached) {
+  while (!targetReached && pros::millis()<timeOut) {
 
     // compare the distance measured through motor encoder units to the target distance. 
     int currentDistance = getCurrentDistance();
@@ -62,9 +67,6 @@ void pidDriveStraight(int distance, double distanceTolerance, int direction, int
     angleDerivative = angleError - anglePrevError;
     anglePrevError = angleError;
 
-    controller.set_text(0, 0, std::to_string(angleError));
-
-
     // using the predefined weights and established values for the three PID actions, calculate the necessary speed and angle adjustment
     int motorSpeed = kP * distanceError + kI * distanceIntegral + kD * distanceDerivative;
     int angleAdjustment = akP * angleError + akI * angleIntegral + akD * angleDerivative;
@@ -80,7 +82,7 @@ void pidDriveStraight(int distance, double distanceTolerance, int direction, int
     }
 
   }
-
+setDrive(0,0);
 }
 
 // this function uses a PID to turn in a direction to a target angle with a given angle tolerance.
@@ -88,9 +90,9 @@ void pidTurn(int angle, double angleTolerance) {
 
   // sets the weights for the proportional, integral, and derivative PID actions
 
-  const double kP = 5;
-  const double kI = 0;
-  const double kD = 0;
+  const double kP = 4;
+  const double kI = 0.00025;
+  const double kD = 0.035;
 
   //   const double kP = 0.6*kU;
   // const double kI = 1.2*kU/tU;
@@ -104,7 +106,9 @@ void pidTurn(int angle, double angleTolerance) {
 
   bool targetReached = false;
 
-  while (!targetReached) {
+  int timeOut = pros::millis() + 2000;
+
+  while (!targetReached && pros::millis()<timeOut) {
 
     // compare the angle measured through the inertial sensor to the target angle
     int currentAngle = getCurrentAngle();
@@ -114,12 +118,13 @@ void pidTurn(int angle, double angleTolerance) {
     angleIntegral += angleError;
     angleDerivative = angleError - anglePrevError;
     anglePrevError = angleError;
+    controller.set_text(0, 0, std::to_string(currentAngle));
 
     // using the predefined weights and established values for the three PID actions, calculate the necessary motor speed adjustments
     int angleAdjustment = kP * angleError + kI * angleIntegral + kD * angleDerivative;
     
     // power the drivetrain accordingly
-    setDrive(-angleAdjustment, angleAdjustment);
+    setDrive(angleAdjustment, -angleAdjustment);
     pros::delay(10);
 
     // check to see if the target has been reached and break if this is the case
@@ -129,6 +134,7 @@ void pidTurn(int angle, double angleTolerance) {
     }
     
   }
+  setDrive(0,0);
 }
 
 // this function returns the angle measured by the inertial sensor

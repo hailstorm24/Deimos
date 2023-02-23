@@ -16,7 +16,12 @@ void pidDriveStraight(int distance, double distanceTolerance, int direction, int
 
   const double kP = 0.325;
   const double kI = 0.00020;
-  const double kD = 0.3; // 0.15;
+  const double kD = 0.3;
+
+  const double akP = 10;
+  const double akI = 0;
+  const double akD = 0.7;
+
 
   // resets drive encoders, sets all variables to zero
   resetDriveEncoders();
@@ -38,7 +43,6 @@ void pidDriveStraight(int distance, double distanceTolerance, int direction, int
     int currentDistance = getCurrentDistance();
     distanceError = distance - currentDistance;
 
-    controller.set_text(0, 0, std::to_string(distanceError));
     // compare the angle measured through the inertial sensor to the target angle
     int currentAngle = getCurrentAngle();
     angleError = angle - currentAngle;
@@ -52,13 +56,18 @@ void pidDriveStraight(int distance, double distanceTolerance, int direction, int
     distancePrevError = distanceError;
 
     angleIntegral += angleError;
+    if(angleError > 1000.0){
+      angleIntegral = 0;
+    }
     angleDerivative = angleError - anglePrevError;
     anglePrevError = angleError;
 
+    controller.set_text(0, 0, std::to_string(angleError));
+
+
     // using the predefined weights and established values for the three PID actions, calculate the necessary speed and angle adjustment
     int motorSpeed = kP * distanceError + kI * distanceIntegral + kD * distanceDerivative;
-    int angleAdjustment = 0;
-    // int angleAdjustment = kP * angleError + kI * angleIntegral + kD * angleDerivative;
+    int angleAdjustment = akP * angleError + akI * angleIntegral + akD * angleDerivative;
 
     // power the drivetrain accordingly
     setDrive((direction*motorSpeed)+angleAdjustment,(direction*motorSpeed)-angleAdjustment);

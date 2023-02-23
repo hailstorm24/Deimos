@@ -141,11 +141,11 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/pidGyro.cpp.o",
-            "src/pidGyro.cpp"
+            "bin/autonFunctions.cpp.o",
+            "src/autonFunctions.cpp"
         ],
         "directory": "/Users/hailstorm/Deimos",
-        "file": "src/pidGyro.cpp"
+        "file": "src/autonFunctions.cpp"
     },
     {
         "arguments": [
@@ -178,10 +178,10 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/autonFunctions.cpp.o",
-            "src/autonFunctions.cpp"
+            "bin/pidGyro.cpp.o",
+            "src/pidGyro.cpp"
         ],
         "directory": "/Users/hailstorm/Deimos",
-        "file": "src/autonFunctions.cpp"
+        "file": "src/pidGyro.cpp"
     }
 ]

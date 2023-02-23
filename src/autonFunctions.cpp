@@ -31,7 +31,7 @@ void spinRoller(bool blue, int bailTime){
 void skillsAuton(){
     // straight(-0.1);
 	// spinRoller(true,1000);
-	straight(3);
+	straight(2);
 	// turn(-90);
 	// straight(1);
 }

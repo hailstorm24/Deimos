@@ -118,7 +118,7 @@ void pidTurn(int angle, double angleTolerance) {
     angleIntegral += angleError;
     angleDerivative = angleError - anglePrevError;
     anglePrevError = angleError;
-    controller.set_text(0, 0, std::to_string(currentAngle));
+    // controller.set_text(0, 0, std::to_string(currentAngle));
 
     // using the predefined weights and established values for the three PID actions, calculate the necessary motor speed adjustments
     int angleAdjustment = kP * angleError + kI * angleIntegral + kD * angleDerivative;

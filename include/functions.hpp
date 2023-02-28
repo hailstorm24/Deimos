@@ -12,6 +12,7 @@ void setDrive(int leftPower,int rightPower);
 void setIntakeRoller(int power);
 void cycleCata(int distance);
 void expansionOn();
+void shootExpansion();
 
 // autons
 

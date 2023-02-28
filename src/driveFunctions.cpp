@@ -38,10 +38,14 @@ void setDrive(int leftPower,int rightPower){
 // triggers expansion pneumatics if the X button is pressed
 void expansionOn(){
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)){
-        expansionA.set_value(true);
-        expansionB.set_value(true);
-        expansionC.set_value(true);
+        shootExpansion();
     }
+}
+
+void shootExpansion(){
+    expansionA.set_value(true);
+    expansionB.set_value(true);
+    expansionC.set_value(true);
 }
 // powers the intake/roller based on the states of buttons R1 and R2
 void setIntakeRollerMotors(){

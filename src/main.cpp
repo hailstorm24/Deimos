@@ -32,8 +32,12 @@ void opcontrol() {
 		setDriveMotors();
 		setIntakeRollerMotors();
 		if(cataPhase==1){
-			cycleCata(1800);
-			cataPhase = 2;
+			cycleCata(-1000);
+			// controller.set_text(0, 0, std::to_string(catapult.get_position()));
+			if(catapult.get_position()<-3300){
+				catapult.tare_position();
+				cataPhase = 2;
+			}
 		}else{
 			cycleCata(2100);
 		}

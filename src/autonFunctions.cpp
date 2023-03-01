@@ -35,36 +35,37 @@ void skillsAuton(){
 	spinRoller(true,4000);
     cycleCata(-800);
 	straight(0.8);
-    straight(-0.3);
+    straight(-0.2);
 	turn(90);
     catapult.tare_position();
     cycleCata(2100);
-	straight(-1);
+	straight(-0.9);
     straight(0.025);
     spinRoller(true,4000);
     straight(1.9);
-    int maxCycles = 4;
+    int maxCycles = 1;
     int iter = 0;
-    // while(iter<maxCycles){
-    //     catapult.tare_position();
-    //     cycleCata(2100);
-    //     turn(0);
-    //     straight(-0.9);
-    //     int time = pros::millis();
-    //     while(pros::millis()-time<5000){
-    //         setIntakeRoller(-200);
-    //     }
-    //     setIntakeRoller(0);
-    //     straight(0.9);
-    //     turn(90);
-    //     catapult.tare_position();
-    //     cycleCata(2100);
-    //     pros::delay(1000);
-    //     iter++;
-    // }
+    while(iter<maxCycles){
+        catapult.tare_position();
+        cycleCata(2100);
+        pros::delay(1000);
+        turn(0);
+        straight(-0.9);
+        int time = pros::millis();
+        while(pros::millis()-time<5000){
+            setIntakeRoller(-200);
+        }
+        setIntakeRoller(0);
+        straight(0.9);
+        turn(90);
+        catapult.tare_position();
+        cycleCata(2100);
+        pros::delay(1000);
+        iter++;
+    }
     catapult.tare_position();
     cycleCata(2100);
-    pros::delay(2000);
+    pros::delay(1000);
     straight(-1.5);
     turn(45);
     while(pros::millis()<51000){
@@ -73,4 +74,28 @@ void skillsAuton(){
     shootExpansion();
     controller.set_text(0, 0, "DONE");
 
+}
+
+void justCloseRollerAuton(bool blue){
+    straight(-0.1);
+    straight(0.025);
+	spinRoller(blue,8000);
+    straight(0.1);
+}
+
+void justFarRollerAuton(bool blue){
+    straight(-1.4);
+    turn(90);
+    straight(-0.15);
+    straight(0.025);
+	spinRoller(blue,3000);
+    straight(0.1);
+}
+
+void farRollerFullAuton(bool blue){
+    catapult.tare_position();
+    cycleCata(2100);
+    pros::delay(4000);
+    cycleCata(2100);
+    justFarRollerAuton(blue);
 }

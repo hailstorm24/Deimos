@@ -20,6 +20,7 @@ void skillsAuton();
 void justCloseRollerAuton(bool blue);
 void justFarRollerAuton(bool blue);
 void farRollerFullAuton(bool blue);
+void closeRollerAWPAuton(bool blue);
 
 // auton functions
 void straight(double tiles);

@@ -89,7 +89,7 @@ void justFarRollerAuton(bool blue){
     straight(-0.15);
     straight(0.025);
 	spinRoller(blue,3000);
-    straight(0.1);
+    straight(0.05);
 }
 
 void farRollerFullAuton(bool blue){
@@ -98,4 +98,20 @@ void farRollerFullAuton(bool blue){
     pros::delay(4000);
     cycleCata(2100);
     justFarRollerAuton(blue);
+}
+
+void closeRollerAWPAuton(bool blue){
+    justCloseRollerAuton(blue);
+    straight(0.1);
+    turn(45);
+    catapult.tare_position();
+    cycleCata(1200);
+    straight(1);
+    straight(1);
+    straight(0.75);
+    turn(-45);
+    straight(0.2);
+    cycleCata(2100);
+    pros::delay(4000);
+    cycleCata(2100);
 }

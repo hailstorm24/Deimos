@@ -23,7 +23,8 @@ void autonomous() {
 	// straight(1);
 	// skillsAuton();
 	// justFarRollerAuton(false);
-	farRollerFullAuton(false);
+	// farRollerFullAuton(false);
+	closeRollerAWPAuton(false);
 }
 
 // drive controls -- controls drivetrain/intake-roller mechanism/expansion and holds catapult until button A triggers the catapult to cycle

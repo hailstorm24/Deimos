@@ -25,4 +25,4 @@ pros::Motor intake(11, pros::E_MOTOR_GEARSET_18,true, pros::E_MOTOR_ENCODER_COUN
 pros::Imu inertialSensor(1);
 
 //OPTICAL SENSOR
-pros::Optical opticalSensor(5); // set up color sensor
+pros::Optical opticalSensor(9); // set up color sensor

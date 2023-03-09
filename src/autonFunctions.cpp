@@ -29,6 +29,37 @@ void spinRoller(bool blue, int bailTime){
     setIntakeRoller(0);
 }
 
+void skillsRollerAuton(){
+    straight(-0.1);
+    straight(0.025);
+	spinRoller(true,4000);
+	straight(0.8);
+    straight(-0.2);
+	turn(90);
+    straight(-0.9);
+    straight(0.025);
+    spinRoller(true,4000);
+    straight(2.5);
+    turn(0);
+    straight(1);
+    straight(1);
+    straight(2.5);
+    straight(-0.8);
+    turn(-90);
+    straight(-1);
+    straight(-1);
+    straight(-1);
+    straight(0.05);
+	spinRoller(true,4000);
+    straight(0.95);
+    straight(-0.2);
+	turn(-180);
+    straight(-1);
+    straight(0.04);
+    spinRoller(true,4000);
+    straight(2.5);
+}
+
 void skillsAuton(){
     straight(-0.1);
     straight(0.025);

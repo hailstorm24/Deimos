@@ -22,9 +22,10 @@ void competition_initialize() {
 void autonomous() {
 	// straight(1);
 	// skillsAuton();
+	skillsRollerAuton();
 	// justFarRollerAuton(false);
 	// farRollerFullAuton(false);
-	closeRollerAWPAuton(false);
+	// closeRollerAWPAuton(false);
 }
 
 // drive controls -- controls drivetrain/intake-roller mechanism/expansion and holds catapult until button A triggers the catapult to cycle
@@ -36,8 +37,7 @@ void opcontrol() {
 		setIntakeRollerMotors();
 		if(cataPhase==1){
 			cycleCata(-1000);
-			// controller.set_text(0, 0, std::to_string(catapult.get_position()));
-			if(catapult.get_position()<-3300){
+			if(catapult.get_position()<-4460){
 				catapult.tare_position();
 				cataPhase = 2;
 			}

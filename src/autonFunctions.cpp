@@ -12,71 +12,72 @@ void turn(int degrees){
 }
 
 void spinRoller(bool blue, int bailTime){
+    straight(-0.25);
+    straight(0.025);
     opticalSensor.set_led_pwm(100);
-    int power = 1000;
+    double power = 1000;
     setIntakeRoller(-power);
     double startTime = pros::millis();
     if(!blue){
         while(abs(opticalSensor.get_hue()-200)>60 && (pros::millis()-startTime)<bailTime){ // while the sensor sees red (and the bail time hasn't been reached)
             pros::delay(10);
             setIntakeRoller(-power);
+            power -=1;
         }
-        // while(int(opticalSensor.get_hue()) % 300 >60 && (pros::millis()-startTime)<bailTime){ // while the sensor sees red (and the bail time hasn't been reached)
-        //     pros::delay(50);
-        //     setIntakeRoller(25);
-        // }
     }
     else{
         while(int(opticalSensor.get_hue()) % 300 >60 && (pros::millis()-startTime)<bailTime){ // while the sensor sees blue (and the bail time hasn't been reached)
             pros::delay(10);
             setIntakeRoller(-power);
-            // power+=3;
+            power-=1;
         }
         // while(abs(opticalSensor.get_hue()-200)>60 && (pros::millis()-startTime)<bailTime){ // while the sensor sees red (and the bail time hasn't been reached)
         //     pros::delay(50);
-        //     setIntakeRoller(25);
+        //     setIntakeRoller(power);
         // }
     }
     controller.set_text(0, 0, std::to_string((int)opticalSensor.get_hue()));
+    if((pros::millis()-startTime)<bailTime){
+        setIntakeRoller(30);
+    }else{
+        setIntakeRoller(0);
+    }
+    straight(0.25);
     setIntakeRoller(0);
+
 }
 
-void rollerTest(){
-    straight(-1);
-    straight(0.068);
-    spinRoller(true,10000);
+void rollerTest(bool blue){
+    spinRoller(blue,4000);
 }
 
 void skillsRollerAuton(){
-    double backupConst = 0.025;
     straight(-0.5);
-    straight(backupConst);
 	spinRoller(true,4000);
 	straight(1);
     straight(-0.2);
 	turn(90);
     straight(-1.25);
-    straight(backupConst);
     spinRoller(true,4000);
     straight(2.5);
     turn(0);
     straight(1);
     straight(1);
     straight(2.5);
-    straight(-0.8);
+    straight(-0.5);
     turn(-90);
-    straight(-1);
-    straight(-1);
-    straight(-1.5);
-    straight(backupConst);
+    straight(-2.25);
+    straight(0.35);
+    turn(-180);
+    straight(-0.9);
 	spinRoller(true,4000);
-    straight(0.9);
+    straight(0.8);
     straight(-0.2);
-	turn(-180);
-    setIntakeRoller(50);
+	turn(-90);
     straight(-1.25);
-    straight(backupConst);
     spinRoller(true,4000);
+    straight(0.75);
+    turn(-180);
     straight(2.5);
     cycleCata(2100);
     pros::delay(3000);

@@ -22,7 +22,7 @@ void competition_initialize() {
 void autonomous() {
 	// straight(1);
 	// skillsAuton();
-	// rollerTest();
+	// rollerTest(true);
 	skillsRollerAuton();
 	// justFarRollerAuton(false);
 	// farRollerFullAuton(false);

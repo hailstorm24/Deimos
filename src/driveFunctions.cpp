@@ -8,9 +8,11 @@
 #define DIGITAL_SENSOR_PORT_A 4
 #define DIGITAL_SENSOR_PORT_B 3
 #define DIGITAL_SENSOR_PORT_C 2
+#define DIGITAL_SENSOR_PORT_D 5
 pros::ADIDigitalOut expansionA (DIGITAL_SENSOR_PORT_A);
 pros::ADIDigitalOut expansionB (DIGITAL_SENSOR_PORT_B);
 pros::ADIDigitalOut expansionC (DIGITAL_SENSOR_PORT_C);
+pros::ADIDigitalOut expansionD (DIGITAL_SENSOR_PORT_D);
 
 
 
@@ -46,6 +48,7 @@ void shootExpansion(){
     expansionA.set_value(true);
     expansionB.set_value(true);
     expansionC.set_value(true);
+    expansionD.set_value(true);
 }
 // powers the intake/roller based on the states of buttons R1 and R2
 void setIntakeRollerMotors(){

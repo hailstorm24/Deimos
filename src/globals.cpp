@@ -19,7 +19,7 @@ pros::Motor driveRightFront(18, pros::E_MOTOR_GEARSET_18, false, pros::E_MOTOR_E
 pros::Motor catapult(12, pros::E_MOTOR_GEARSET_36,true, pros::E_MOTOR_ENCODER_COUNTS);
 
 // INTAKE
-pros::Motor intake(11, pros::E_MOTOR_GEARSET_18,true, pros::E_MOTOR_ENCODER_COUNTS);
+pros::Motor intake(11, pros::E_MOTOR_GEARSET_36,true, pros::E_MOTOR_ENCODER_COUNTS);
 
 //INERTIAL SENSOR
 pros::Imu inertialSensor(1);

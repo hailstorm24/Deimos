@@ -67,11 +67,11 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/globals.cpp.o",
-            "src/globals.cpp"
+            "bin/driveFunctions.cpp.o",
+            "src/driveFunctions.cpp"
         ],
         "directory": "/Users/hailstorm/Deimos",
-        "file": "src/globals.cpp"
+        "file": "src/driveFunctions.cpp"
     },
     {
         "arguments": [
@@ -104,11 +104,11 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/autonFunctions.cpp.o",
-            "src/autonFunctions.cpp"
+            "bin/globals.cpp.o",
+            "src/globals.cpp"
         ],
         "directory": "/Users/hailstorm/Deimos",
-        "file": "src/autonFunctions.cpp"
+        "file": "src/globals.cpp"
     },
     {
         "arguments": [
@@ -178,10 +178,10 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/driveFunctions.cpp.o",
-            "src/driveFunctions.cpp"
+            "bin/autonFunctions.cpp.o",
+            "src/autonFunctions.cpp"
         ],
         "directory": "/Users/hailstorm/Deimos",
-        "file": "src/driveFunctions.cpp"
+        "file": "src/autonFunctions.cpp"
     }
 ]

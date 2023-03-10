@@ -16,6 +16,7 @@ void shootExpansion();
 
 // autons
 
+void rollerTest();
 void skillsAuton();
 void skillsRollerAuton();
 void justCloseRollerAuton(bool blue);

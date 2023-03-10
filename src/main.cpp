@@ -22,6 +22,7 @@ void competition_initialize() {
 void autonomous() {
 	// straight(1);
 	// skillsAuton();
+	// rollerTest();
 	skillsRollerAuton();
 	// justFarRollerAuton(false);
 	// farRollerFullAuton(false);
@@ -37,7 +38,7 @@ void opcontrol() {
 		setIntakeRollerMotors();
 		if(cataPhase==1){
 			cycleCata(-1000);
-			if(catapult.get_position()<-4460){
+			if(catapult.get_position()<-3800){
 				catapult.tare_position();
 				cataPhase = 2;
 			}

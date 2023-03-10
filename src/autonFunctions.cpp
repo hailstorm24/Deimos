@@ -13,7 +13,7 @@ void turn(int degrees){
 
 void spinRoller(bool blue, int bailTime){
     opticalSensor.set_led_pwm(100);
-    setIntakeRoller(-75);
+    setIntakeRoller(-100);
     double startTime = pros::millis();
     if(!blue){
         while(abs(opticalSensor.get_hue()-200)>60 && (pros::millis()-startTime)<bailTime){ // while the sensor sees red (and the bail time hasn't been reached)
@@ -29,15 +29,21 @@ void spinRoller(bool blue, int bailTime){
     setIntakeRoller(0);
 }
 
+void rollerTest(){
+    straight(-1);
+    straight(0.068);
+    spinRoller(true,4000);
+}
+
 void skillsRollerAuton(){
-    straight(-0.1);
-    straight(0.025);
+    straight(-0.5);
+    straight(0.068);
 	spinRoller(true,4000);
 	straight(0.8);
     straight(-0.2);
 	turn(90);
-    straight(-0.9);
-    straight(0.025);
+    straight(-1.25);
+    straight(0.068);
     spinRoller(true,4000);
     straight(2.5);
     turn(0);
@@ -48,16 +54,25 @@ void skillsRollerAuton(){
     turn(-90);
     straight(-1);
     straight(-1);
-    straight(-1);
-    straight(0.05);
+    straight(-1.5);
+    straight(0.068);
 	spinRoller(true,4000);
-    straight(0.95);
+    straight(0.9);
     straight(-0.2);
 	turn(-180);
-    straight(-1);
-    straight(0.04);
+    straight(-1.25);
+    straight(0.068);
     spinRoller(true,4000);
     straight(2.5);
+    cycleCata(2100);
+    pros::delay(3000);
+    straight(-2);
+    turn(-135);
+    while(pros::millis()<51000){
+        pros::delay(100);
+    }
+    shootExpansion();
+    controller.set_text(0, 0, "DONE");
 }
 
 void skillsAuton(){

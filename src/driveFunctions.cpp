@@ -37,7 +37,7 @@ void setDrive(int leftPower,int rightPower){
 
 // triggers expansion pneumatics if the X button is pressed
 void expansionOn(){
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)){
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)&&pros::millis()>51000){
         shootExpansion();
     }
 }

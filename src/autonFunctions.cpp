@@ -38,7 +38,7 @@ void spinRoller(bool blue, int bailTime){
     }
     controller.set_text(0, 0, std::to_string((int)opticalSensor.get_hue()));
     if((pros::millis()-startTime)<bailTime){
-        setIntakeRoller(30);
+        setIntakeRoller(20);
     }else{
         setIntakeRoller(0);
     }
@@ -52,13 +52,15 @@ void rollerTest(bool blue){
 }
 
 void skillsRollerAuton(){
+    catapult.tare_position();
+    cycleCata(1200);
     straight(-0.5);
-	spinRoller(true,4000);
+	spinRoller(false,3000);
 	straight(1);
-    straight(-0.2);
+    straight(-0.6);
 	turn(90);
     straight(-1.25);
-    spinRoller(true,4000);
+    spinRoller(false,3000);
     straight(2.5);
     turn(0);
     straight(1);
@@ -66,23 +68,25 @@ void skillsRollerAuton(){
     straight(2.5);
     straight(-0.5);
     turn(-90);
-    straight(-2.25);
-    straight(0.35);
+    straight(-1.8);
     turn(-180);
     straight(-0.9);
-	spinRoller(true,4000);
+	spinRoller(false,3000);
     straight(0.8);
-    straight(-0.2);
+    straight(-0.4);
 	turn(-90);
     straight(-1.25);
-    spinRoller(true,4000);
+    spinRoller(false,3000);
     straight(0.75);
     turn(-180);
     straight(2.5);
     cycleCata(2100);
-    pros::delay(3000);
+    pros::delay(2000);
     straight(-2);
     turn(45);
+    if(pros::millis()<57000){
+        straight(-0.25);
+    }
     while(pros::millis()<51000){
         pros::delay(100);
     }
@@ -147,10 +151,40 @@ void justCloseRollerAuton(bool blue){
 void justFarRollerAuton(bool blue){
     straight(-1.4);
     turn(90);
-    straight(-0.15);
+    setIntakeRoller(20);
+	straight(-0.25);
     straight(0.025);
-	spinRoller(blue,3000);
+    int bailTime = 4000;
+    opticalSensor.set_led_pwm(100);
+    double power = 1000;
+    setIntakeRoller(-power);
+    double startTime = pros::millis();
+    if(!blue){
+        while(abs(opticalSensor.get_hue()-200)>60 && (pros::millis()-startTime)<bailTime){ // while the sensor sees red (and the bail time hasn't been reached)
+            pros::delay(10);
+            setIntakeRoller(-power);
+            power -=1;
+        }
+    }
+    else{
+        while(int(opticalSensor.get_hue()) % 300 >60 && (pros::millis()-startTime)<bailTime){ // while the sensor sees blue (and the bail time hasn't been reached)
+            pros::delay(10);
+            setIntakeRoller(-power);
+            power-=1;
+        }
+        // while(abs(opticalSensor.get_hue()-200)>60 && (pros::millis()-startTime)<bailTime){ // while the sensor sees red (and the bail time hasn't been reached)
+        //     pros::delay(50);
+        //     setIntakeRoller(power);
+        // }
+    }
+    controller.set_text(0, 0, std::to_string((int)opticalSensor.get_hue()));
+    if((pros::millis()-startTime)<bailTime){
+        setIntakeRoller(20);
+    }else{
+        setIntakeRoller(0);
+    }
     straight(0.05);
+    setIntakeRoller(0);
 }
 
 void farRollerFullAuton(bool blue){
@@ -162,11 +196,11 @@ void farRollerFullAuton(bool blue){
 }
 
 void closeRollerAWPAuton(bool blue){
+    catapult.tare_position();
+    cycleCata(1200);
     justCloseRollerAuton(blue);
     straight(0.1);
     turn(45);
-    catapult.tare_position();
-    cycleCata(1200);
     straight(1);
     straight(1);
     straight(0.75);

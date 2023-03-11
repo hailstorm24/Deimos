@@ -20,12 +20,9 @@ void competition_initialize() {
 
 // autonomous code -- this is where we will run/call our different autonomous programs
 void autonomous() {
-	// straight(1);
-	// skillsAuton();
-	// rollerTest(true);
-	skillsRollerAuton();
+	// skillsRollerAuton();
 	// justFarRollerAuton(false);
-	// farRollerFullAuton(false);
+	farRollerFullAuton(true);
 	// closeRollerAWPAuton(false);
 }
 

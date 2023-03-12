@@ -12,8 +12,9 @@ void turn(int degrees){
 }
 
 void spinRoller(bool blue, int bailTime){
+    setIntakeRoller(20);
     straight(-0.25);
-    straight(0.025);
+    straight(0.035);
     opticalSensor.set_led_pwm(100);
     double power = 1000;
     setIntakeRoller(-power);
@@ -38,7 +39,7 @@ void spinRoller(bool blue, int bailTime){
     }
     controller.set_text(0, 0, std::to_string((int)opticalSensor.get_hue()));
     if((pros::millis()-startTime)<bailTime){
-        setIntakeRoller(20);
+        setIntakeRoller(50);
     }else{
         setIntakeRoller(0);
     }
@@ -47,42 +48,66 @@ void spinRoller(bool blue, int bailTime){
 
 }
 
+void spinSkillsRoller(bool blue, int bailTime){
+    straight(-0.25);
+    straight(0.035);
+    opticalSensor.set_led_pwm(100);
+    double power = 50;
+    setIntakeRoller(-power);
+    double startTime = pros::millis();
+    if(!blue){
+        while(abs(opticalSensor.get_hue()-200)>60 && (pros::millis()-startTime)<bailTime){ // while the sensor sees red (and the bail time hasn't been reached)
+            pros::delay(10);
+            setIntakeRoller(-power);
+            power -=1;
+        }
+    }
+    else{
+        while(int(opticalSensor.get_hue()) % 300 >60 && (pros::millis()-startTime)<bailTime){ // while the sensor sees blue (and the bail time hasn't been reached)
+            pros::delay(10);
+            setIntakeRoller(-power);
+            power-=1;
+        }
+    }
+    controller.set_text(0, 0, std::to_string((int)opticalSensor.get_hue()));
+    setIntakeRoller(0);
+}
+
+
 void rollerTest(bool blue){
-    spinRoller(blue,4000);
+    spinSkillsRoller(blue,4000);
 }
 
 void skillsRollerAuton(){
     catapult.tare_position();
     cycleCata(1200);
     straight(-0.5);
-	spinRoller(false,3000);
-	straight(1);
-    straight(-0.6);
+	spinSkillsRoller(false,3000);
+	straight(1.1);
+    straight(-0.4);
 	turn(90);
     straight(-1.25);
-    spinRoller(false,3000);
-    straight(2.5);
+    spinSkillsRoller(false,3000);
+    straight(2.25);
+    turn(100);
+    cycleCata(2100);
+    pros::delay(2000);
     turn(0);
     straight(1);
     straight(1);
     straight(2.5);
-    straight(-0.5);
+    straight(-0.3);
     turn(-90);
-    straight(-1.8);
+    straight(-2.1);
     turn(-180);
-    straight(-0.9);
-	spinRoller(false,3000);
-    straight(0.8);
+    straight(-1);
+	spinSkillsRoller(false,3000);
+    straight(0.9);
     straight(-0.4);
 	turn(-90);
     straight(-1.25);
-    spinRoller(false,3000);
-    straight(0.75);
-    turn(-180);
-    straight(2.5);
-    cycleCata(2100);
-    pros::delay(2000);
-    straight(-2);
+    spinSkillsRoller(false,3000);
+    straight(0.5);
     turn(45);
     if(pros::millis()<57000){
         straight(-0.25);
@@ -142,10 +167,7 @@ void skillsAuton(){
 }
 
 void justCloseRollerAuton(bool blue){
-    straight(-0.1);
-    straight(0.025);
 	spinRoller(blue,8000);
-    straight(0.1);
 }
 
 void justFarRollerAuton(bool blue){
@@ -205,7 +227,7 @@ void closeRollerAWPAuton(bool blue){
     straight(1);
     straight(0.75);
     turn(-45);
-    straight(0.2);
+    straight(0.1);
     cycleCata(2100);
     pros::delay(4000);
     cycleCata(2100);

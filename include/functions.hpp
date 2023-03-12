@@ -28,6 +28,8 @@ void closeRollerAWPAuton(bool blue);
 void straight(double tiles);
 void turn(int degrees);
 void spinRoller(bool blue, int bailTime);
+void spinSkillsRoller(bool blue, int bailTime);
+
 
 // pid, inertial-sensor, and other functions
 void pidDriveStraight(int distance, double distanceTolerance, int direction, int angle, double angleTolerance);

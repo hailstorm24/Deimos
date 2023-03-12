@@ -20,10 +20,12 @@ void competition_initialize() {
 
 // autonomous code -- this is where we will run/call our different autonomous programs
 void autonomous() {
-	// skillsRollerAuton();
+	// rollerTest(false);
+	skillsRollerAuton();
+	// justCloseRollerAuton(true);
 	// justFarRollerAuton(false);
-	farRollerFullAuton(true);
-	// closeRollerAWPAuton(false);
+	// farRollerFullAuton(true);
+	// closeRollerAWPAuton(true);
 }
 
 // drive controls -- controls drivetrain/intake-roller mechanism/expansion and holds catapult until button A triggers the catapult to cycle

@@ -30,11 +30,11 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/pidGyro.cpp.o",
-            "src/pidGyro.cpp"
+            "bin/globals.cpp.o",
+            "src/globals.cpp"
         ],
         "directory": "/Users/hailstorm/Deimos",
-        "file": "src/pidGyro.cpp"
+        "file": "src/globals.cpp"
     },
     {
         "arguments": [
@@ -67,11 +67,11 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/globals.cpp.o",
-            "src/globals.cpp"
+            "bin/pidGyro.cpp.o",
+            "src/pidGyro.cpp"
         ],
         "directory": "/Users/hailstorm/Deimos",
-        "file": "src/globals.cpp"
+        "file": "src/pidGyro.cpp"
     },
     {
         "arguments": [

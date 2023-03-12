@@ -47,10 +47,10 @@ void expansionOn(){
 }
 
 void shootExpansion(){
-    expansionC.set_value(true);
-    expansionD.set_value(true);
-    pros::delay(250);
     expansionA.set_value(true);
+    expansionD.set_value(true);
+    pros::delay(500);
+    expansionC.set_value(true);
     expansionB.set_value(true);
 
 }
